@@ -6,23 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
-    {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->id();
-            $table->string('recipient');
-            $table->string('sender');
-            $table->longtext('content');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('messages', function (Blueprint $table) {
+        $table->increments('id');
+        $table->unsignedInteger('recipient')
+             ->references('id')
+             ->on('users');
+        $table->unsignedInteger('sender')
+             ->references('id')
+             ->on('users');
+        $table->longtext('content');
+        $table->dateTime('date-created');
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('messages');
