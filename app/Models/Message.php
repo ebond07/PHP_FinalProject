@@ -14,8 +14,8 @@ class Message extends Model
         'sender',
         'content'
     ];
-    public function user(): BelongsTo
+    public function user_messages(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(user_messages::class);
     }
 }
