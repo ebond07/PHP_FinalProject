@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_messages', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('message_id');
+            $table->string('name');
+            $table->string('email');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('message_id')->references('id')->on('messages');
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_messages');
+        Schema::dropIfExists('contacts');
     }
 };
