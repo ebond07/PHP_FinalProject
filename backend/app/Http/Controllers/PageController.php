@@ -16,7 +16,7 @@ class PageController extends Controller
         $fields = $request->validate([
             'name'        => 'required|string',
             'email' => 'required|string',
-            'password' => 'required|string',
+            'password' => 'required|string'
         ]);
         $user = User::create([
             'name'        => $fields['name'],
@@ -29,6 +29,6 @@ class PageController extends Controller
 
     public function getUsers(){
         $arryUsers = User::all();
-        return response($arryUser, 201);
+        return response($arryUsers, 200);
     }
 }

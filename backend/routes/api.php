@@ -19,5 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/api/setUser', [PageController::class, 'setUser']);
-Route::get('/api/getUsers', [PageController::class, 'getUsers']);
+Route::post('/setUser', [PageController::class, 'setUser']);
+Route::get('/getUsers', [PageController::class, 'getUsers']);
