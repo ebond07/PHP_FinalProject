@@ -27,8 +27,8 @@ class PageController extends Controller
         return response($user, 201);
     }
 
-    public function getCategories(){
-        $arryCategories = Category::all();
-        return response($arryCategories, 201);
+    public function getUsers(){
+        $arryUsers = User::all();
+        return response($arryUser, 201);
     }
 }
