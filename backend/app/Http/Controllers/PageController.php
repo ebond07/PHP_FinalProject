@@ -51,4 +51,22 @@ class PageController extends Controller
         $arryMessages = Message::all();
         return response($arryMessages, 200);
     }
+
+    public function setContact(Request $request){
+        $fields = $request->validate([
+            'name'        => 'required|string',
+            'email' => 'required|string'
+        ]);
+        $contact = Contact::create([
+            'name'        => $fields['name'],
+            'email' => $fields['email']
+        ]);
+
+        return response($contact, 201);
+    }
+
+    public function getContacts(){
+        $arryContacts = User::all();
+        return response($arryContacts, 200);
+    }
 }

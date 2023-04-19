@@ -24,3 +24,6 @@ Route::get('/getUsers', [PageController::class, 'getUsers']);
 
 Route::post('/setMessage', [PageController::class, 'setMessage']);
 Route::get('/getMessages', [PageController::class, 'getMessages']);
+
+Route::post('/setContact', [PageController::class, 'setContact']);
+Route::get('/getContacts', [PageController::class, 'getContacts']);
