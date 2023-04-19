@@ -17,7 +17,7 @@ return new class extends Migration
              ->references('id')
              ->on('users');
         $table->longtext('content');
-        $table->dateTime('date-created');
+        $table->timestamps();
     });
 }
 

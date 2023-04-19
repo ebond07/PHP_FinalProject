@@ -31,4 +31,24 @@ class PageController extends Controller
         $arryUsers = User::all();
         return response($arryUsers, 200);
     }
+
+    public function setMessage(Request $request){
+        $fields = $request->validate([
+            'recipient'        => 'required',
+            'sender' => 'required',
+            'content' => 'required'
+        ]);
+        $message = Message::create([
+            'recipient'        => $fields['recipient'],
+            'sender' => $fields['sender'],
+            'content' => $fields['content']
+        ]);
+
+        return response($message, 201);
+    }
+
+    public function getMessages(){
+        $arryMessages = Message::all();
+        return response($arryMessages, 200);
+    }
 }

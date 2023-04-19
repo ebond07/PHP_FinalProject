@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/setUser', [PageController::class, 'setUser']);
 Route::get('/getUsers', [PageController::class, 'getUsers']);
+
+Route::post('/setMessage', [PageController::class, 'setMessage']);
+Route::get('/getMessages', [PageController::class, 'getMessages']);
