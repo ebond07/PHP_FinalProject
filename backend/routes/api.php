@@ -19,11 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/setUser', [PageController::class, 'setUser']);
-Route::get('/getUsers', [PageController::class, 'getUsers']);
+Route::post('/users', [PageController::class, 'setUser']);
+Route::get('/users', [PageController::class, 'getUsers']);
+Route::get('/users/{id}', [PageController::class, 'getUserById']);
 
-Route::post('/setMessage', [PageController::class, 'setMessage']);
-Route::get('/getMessages', [PageController::class, 'getMessages']);
+Route::post('/messages', [PageController::class, 'setMessage']);
+Route::get('/messages', [PageController::class, 'getMessages']);
+Route::get('/getMessagesFromFiveMinutes', [PageController::class, 'getMessagesFromFiveMinutes']);
+Route::get('/users/{id}/messages', [PageController::class, 'getMessagesRecievedByUser']);
+
 
 Route::post('/setContact', [PageController::class, 'setContact']);
 Route::get('/getContacts', [PageController::class, 'getContacts']);

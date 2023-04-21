@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User_Messages extends Model
 {
+    protected $table = 'user_messages';
     use HasFactory;
     protected $fillable = [
         'message_id',
