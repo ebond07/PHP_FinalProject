@@ -31,3 +31,10 @@ Route::get('/users/{id}/messages', [PageController::class, 'getMessagesRecievedB
 
 Route::post('/setContact', [PageController::class, 'setContact']);
 Route::get('/getContacts', [PageController::class, 'getContacts']);
+Route::get('/getContactsByUser/{id}', [PageController::class, 'getContactsByUser']);
+
+
+Route::delete('users/{id}', [PageController::class, 'deleteUser']);
+Route::delete('messages/{id}', [PageController::class, 'deleteMessage']);
+Route::delete('contacts/{id}', [PageController::class, 'deleteContact']);
+

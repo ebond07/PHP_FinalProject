@@ -37,6 +37,12 @@ class PageController extends Controller
         return response($user, 200);
     }
 
+    public function deleteUser($id) {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response(['message' => 'User deleted successfully'], 200);
+    }
+
     public function setMessage(Request $request){
         $fields = $request->validate([
             'recipient'        => 'required',
@@ -86,6 +92,23 @@ public function getMessagesRecievedByUser($id) {
     return response($messages, 200);
 }
 
+public function deleteMessage($id) {
+    // Find the message by ID
+    $message = Message::findOrFail($id);
+
+    // Delete the User_Message record associated with the message
+    $userMessage = User_Messages::where('message_id', $message->id)->first();
+    if ($userMessage) {
+        $userMessage->delete();
+    }
+
+    // Delete the message
+    $message->delete();
+
+    return response(null, 204);
+}
+
+
     public function setContact(Request $request){
         $fields = $request->validate([
             'user_id' => 'required',
@@ -105,5 +128,22 @@ public function getMessagesRecievedByUser($id) {
     public function getContacts(){
         $arryContacts = Contact::all();
         return response($arryContacts, 200);
+    }
+
+    public function getContactsByUser($id)
+    {
+    // Find the user by ID
+    $user = User::findOrFail($id);
+
+    // Get all contacts associated with the user
+    $contacts = Contact::where('user_id', $user->id)->get();
+
+    return response($contacts, 200);
+    }
+
+    public function deleteContact($id) {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+        return response(['message' => 'Contact deleted successfully'], 200);
     }
 }
