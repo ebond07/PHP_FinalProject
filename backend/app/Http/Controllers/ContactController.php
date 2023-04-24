@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Contact;
 use App\Models\Message;
-use App\Models\User;
+use App\Models\Chat_User;
 use App\Models\User_Messages;
 
 class ContactController extends Controller
@@ -31,7 +31,7 @@ class ContactController extends Controller
     public function getContactsByUser($id)
     {
     // Find the user by ID
-    $user = User::findOrFail($id);
+    $user = Chat_User::findOrFail($id);
 
     // Get all contacts associated with the user
     $contacts = Contact::where('user_id', $user->id)->get();

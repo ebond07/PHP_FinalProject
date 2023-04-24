@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Contact;
 use App\Models\Message;
-use App\Models\User;
+use App\Models\Chat_User;
 use App\Models\User_Messages;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
@@ -19,7 +19,7 @@ class UserController extends Controller
     
         $hashedPassword = Hash::make($fields['password']);
     
-        $user = User::create([
+        $user = Chat_User::create([
             'name'        => $fields['name'],
             'email' => $fields['email'],
             'password' => $hashedPassword
@@ -29,17 +29,17 @@ class UserController extends Controller
     }
     
     public function getUsers(){
-        $arryUsers = User::all();
+        $arryUsers = Chat_User::all();
         return response($arryUsers, 200);
     }
 
     public function getUserById($id) {
-        $user = User::findOrFail($id);
+        $user = Chat_User::findOrFail($id);
         return response($user, 200);
     }
 
     public function deleteUser($id) {
-        $user = User::findOrFail($id);
+        $user = Chat_User::findOrFail($id);
         $user->delete();
         return response(['message' => 'User deleted successfully'], 200);
     }

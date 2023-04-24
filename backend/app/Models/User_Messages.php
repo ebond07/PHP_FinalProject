@@ -19,8 +19,8 @@ class User_Messages extends Model
     {
         return $this->belongsTo(Message::class);
     }
-    public function user()
+    public function chat_user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Chat_User::class);
     }
 }

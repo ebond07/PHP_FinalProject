@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('message_id');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('chat_users');
             $table->foreign('message_id')->references('id')->on('messages');
         });
     }

@@ -15,8 +15,8 @@ class Contact extends Model
         'email',
     ];
 
-    public function user(): BelongsTo
+    public function chat_user(): BelongsTo
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(chat_user::class);
     }
 }

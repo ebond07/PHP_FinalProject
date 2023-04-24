@@ -12,10 +12,10 @@ return new class extends Migration
         $table->increments('id');
         $table->unsignedInteger('recipient')
              ->references('id')
-             ->on('users');
+             ->on('chat_users');
         $table->unsignedInteger('sender')
              ->references('id')
-             ->on('users');
+             ->on('chat_users');
         $table->longtext('content');
         $table->timestamps();
     });

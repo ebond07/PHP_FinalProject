@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Contact;
 use App\Models\Message;
-use App\Models\User;
+use App\Models\Chat_User;
 use App\Models\User_Messages;
 
 class MessageController extends Controller
