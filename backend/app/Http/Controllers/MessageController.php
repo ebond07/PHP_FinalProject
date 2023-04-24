@@ -10,39 +10,8 @@ use App\Models\Message;
 use App\Models\User;
 use App\Models\User_Messages;
 
-class PageController extends Controller
+class MessageController extends Controller
 {
-    public function setUser(Request $request){
-        $fields = $request->validate([
-            'name'        => 'required|string',
-            'email' => 'required|string',
-            'password' => 'required|string'
-        ]);
-        $user = User::create([
-            'name'        => $fields['name'],
-            'email' => $fields['email'],
-            'password' => $fields['password']
-        ]);
-
-        return response($user, 201);
-    }
-
-    public function getUsers(){
-        $arryUsers = User::all();
-        return response($arryUsers, 200);
-    }
-
-    public function getUserById($id) {
-        $user = User::findOrFail($id);
-        return response($user, 200);
-    }
-
-    public function deleteUser($id) {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return response(['message' => 'User deleted successfully'], 200);
-    }
-
     public function setMessage(Request $request){
         $fields = $request->validate([
             'recipient'        => 'required',
@@ -108,42 +77,4 @@ public function deleteMessage($id) {
     return response(null, 204);
 }
 
-
-    public function setContact(Request $request){
-        $fields = $request->validate([
-            'user_id' => 'required',
-            'name'        => 'required|string',
-            'email' => 'required|string'
-            
-        ]);
-        $contact = Contact::create([
-            'user_id'        => $fields['user_id'],
-            'name'        => $fields['name'],
-            'email' => $fields['email']
-        ]);
-
-        return response($contact, 201);
-    }
-
-    public function getContacts(){
-        $arryContacts = Contact::all();
-        return response($arryContacts, 200);
-    }
-
-    public function getContactsByUser($id)
-    {
-    // Find the user by ID
-    $user = User::findOrFail($id);
-
-    // Get all contacts associated with the user
-    $contacts = Contact::where('user_id', $user->id)->get();
-
-    return response($contacts, 200);
-    }
-
-    public function deleteContact($id) {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
-        return response(['message' => 'Contact deleted successfully'], 200);
-    }
 }
