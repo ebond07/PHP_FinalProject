@@ -11,17 +11,18 @@ const password = document.querySelector('#password').value;
 
 
   try {
-    const response = await fetch('http://127.0.0.1:8080/api/v1/users', {
+    const form = new FormData();
+    form.append('name', name);
+    form.append('email', email);
+    form.append('password', password);
+  
+    const response = await fetch('http://127.0.0.1:8000/api/v1/users', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ name, email, password })
+      body: form
     });
 
     if (response.ok) {
-      alert('User registration successful!');
-      window.location.href = '/frontend/HTML/login.html'; // redirect to login page
+      window.location.href = './login.html'; // redirect to login page
     } else {
         console.log(response.status)
       throw new Error('User registration failed');
