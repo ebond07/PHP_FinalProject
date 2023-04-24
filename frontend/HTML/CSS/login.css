@@ -13,7 +13,6 @@ body {
     flex-direction: column;
     align-items: center;
   }
-  
   h1 {
     color: #333;
     font-size: 2em;
@@ -34,7 +33,6 @@ body {
     margin-bottom: 5px;
   }
   
-  input[type="text"],
   input[type="email"],
   input[type="password"] {
     width: 100%;
@@ -55,5 +53,18 @@ body {
   
   button[type="submit"]:hover {
     background-color: #3e8e41;
+  }
+  .register {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .register a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .register a:hover {
+    text-decoration: underline;
   }
   
