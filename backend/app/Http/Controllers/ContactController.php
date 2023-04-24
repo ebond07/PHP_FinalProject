@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,7 +10,6 @@ use App\Models\User_Messages;
 
 class ContactController extends Controller
 {
-
     public function setContact(Request $request){
         $fields = $request->validate([
             'user_id' => 'required',
@@ -25,15 +22,12 @@ class ContactController extends Controller
             'name'        => $fields['name'],
             'email' => $fields['email']
         ]);
-
         return response($contact, 201);
     }
-
     public function getContacts(){
         $arryContacts = Contact::all();
         return response($arryContacts, 200);
     }
-
     public function getContactsByUser($id)
     {
     // Find the user by ID

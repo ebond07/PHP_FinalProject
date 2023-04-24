@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -10,7 +8,6 @@ use App\Models\Message;
 use App\Models\User;
 use App\Models\User_Messages;
 use Illuminate\Support\Facades\Hash;
-
 class UserController extends Controller
 {
     public function setUser(Request $request){
@@ -31,7 +28,6 @@ class UserController extends Controller
         return response($user, 201);
     }
     
-
     public function getUsers(){
         $arryUsers = User::all();
         return response($arryUsers, 200);
