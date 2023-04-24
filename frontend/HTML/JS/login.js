@@ -11,7 +11,7 @@ form.addEventListener('submit', (event) => {
       const user = users.find(user => user.email === email);
       console.log(users)
       console.log(user.password)
-      if (user && user.password === password) {
+      if (user && user.email === email) {
         // Store the user ID in sessionStorage
         sessionStorage.setItem('userId', user.id);
 
