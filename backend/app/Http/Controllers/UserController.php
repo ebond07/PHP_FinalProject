@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Message;
 use App\Models\User;
 use App\Models\User_Messages;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -18,14 +19,18 @@ class UserController extends Controller
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
+    
+        $hashedPassword = Hash::make($fields['password']);
+    
         $user = User::create([
             'name'        => $fields['name'],
             'email' => $fields['email'],
-            'password' => $fields['password']
+            'password' => $hashedPassword
         ]);
-
+    
         return response($user, 201);
     }
+    
 
     public function getUsers(){
         $arryUsers = User::all();
