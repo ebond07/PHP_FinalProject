@@ -81,4 +81,45 @@
     border: 1px solid #2c3e50;
     border-radius: 5px;
   }
+
+  .chat-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
+  
+  .incoming {
+    justify-content: flex-start;
+  }
+  
+  .outgoing {
+    justify-content: flex-end;
+  }
+  
+  .message {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .incoming .message {
+    border-top-left-radius: 0;
+  }
+  
+  .outgoing .message {
+    border-top-right-radius: 0;
+  }
+  
+  .message p {
+    margin-bottom: 5px;
+  }
+  
+  .time {
+    font-size: 0.8rem;
+    color: #777;
+  }
   
