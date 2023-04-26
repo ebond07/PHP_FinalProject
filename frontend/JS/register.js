@@ -22,7 +22,7 @@ const password = document.querySelector('#password').value;
     });
 
     if (response.ok) {
-      window.location.href = './login.html'; // redirect to login page
+      window.location.href = '../HTML/login.html'; // redirect to login page
     } else {
         console.log(response.status)
       throw new Error('User registration failed');

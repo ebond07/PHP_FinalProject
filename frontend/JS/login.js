@@ -16,7 +16,7 @@ form.addEventListener('submit', (event) => {
         sessionStorage.setItem('userId', user.id);
 
         // Redirect to chat.html
-        window.location.href = './chat.html';
+        window.location.href = '../HTML/chat.html';
       } else {
         const errorMessage = user ? 'Invalid email or password' : 'No user found with that email';
         alert(errorMessage);
