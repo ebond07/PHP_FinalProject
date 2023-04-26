@@ -29,3 +29,6 @@ Route::delete('v1/users/{id}', [UserController::class, 'deleteUser']);
 Route::delete('v1/messages/{id}', [MessageController::class, 'deleteMessage']);
 Route::delete('v1/contacts/{id}', [ContactController::class, 'deleteContact']);
 
+Route::get('v1/messages/sender/{senderId}/receiver/{receiverId}', [MessageController::class, 'getMessagesBetweenSenderAndReceiver']);
+
+

@@ -77,4 +77,31 @@ public function deleteMessage($id) {
     return response(null, 204);
 }
 
+public function getMessagesBetweenSenderAndReceiver($senderId, $receiverId)
+{
+    // Find the user by sender ID
+    $sender = Chat_User::findOrFail($senderId);
+
+    // Find the user by receiver ID
+    $receiver = Chat_User::findOrFail($receiverId);
+
+    // Get all message IDs associated with the sender and receiver
+    $messageIds = User_Messages::whereIn('user_id', [$sender->id, $receiver->id])->get()->pluck('message_id')->toArray();
+
+    // Get the messages based on the message IDs
+    $messages = Message::whereIn('id', $messageIds)
+                        ->where(function ($query) use ($sender, $receiver) {
+                            $query->where('sender', $sender->id)
+                                  ->where('recipient', $receiver->id);
+                        })
+                        ->orWhere(function ($query) use ($sender, $receiver) {
+                            $query->where('sender', $receiver->id)
+                                  ->where('recipient', $sender->id);
+                        })
+                        ->get();
+
+    return response($messages, 200);
+}
+
+
 }

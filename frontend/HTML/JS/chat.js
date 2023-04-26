@@ -28,8 +28,9 @@ fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
     alert("An error occurred while getting user data");
   });
 
-  function getMessages() {
-    fetch(`http://127.0.0.1:8000/api/v1/messages`)
+  function getMessages(userId) {
+
+    fetch(`http://127.0.0.1:8000/api/v1/messages/sender/${userId}/receiver/7`)
       .then(response => response.json())
       .then(messages => {
         const chatList = document.querySelector('#messages');
@@ -54,7 +55,7 @@ fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
   }
 
   window.onload = function() {
-    getMessages();
+    getMessages(userId);
   };
   
   
