@@ -50,7 +50,7 @@ class MessageController extends Controller
 
 public function getMessagesRecievedByUser($id) {
     // Find the user by ID
-    $user = User::findOrFail($id);
+    $user = Chat_User::findOrFail($id);
 
     // Get all message IDs associated with the user
     $messageIds = User_Messages::where('user_id', $user->id)->pluck('message_id');
