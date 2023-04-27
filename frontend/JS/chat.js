@@ -58,34 +58,56 @@ window.onload = function() {
 };
 
 const form = document.querySelector('form');
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', async function(event) {
   event.preventDefault();
   const messageInput = document.querySelector('input[type="text"]');
   const messageContent = messageInput.value.trim();
   if (messageContent.length > 0) {
-    const message = {
-      sender: userId,
-      receiver: 7,
-      content: messageContent
-    };
-    fetch('http://127.0.0.1:8000/api/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(message)
-    })
-      .then(response => {
-        if (response.ok) {
-          messageInput.value = '';
-          getMessages(userId);
-        } else {
-          throw new Error('Failed to send message');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert('An error occurred while sending the message');
+    
+    const form = document.querySelector('form');
+form.addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const messageInput = document.querySelector('input[type="text"]');
+  const messageContent = messageInput.value.trim();
+  if (messageContent.length > 0) {
+    const formData = new FormData();
+    formData.append('sender', userId);
+    formData.append('recipient', 7);
+    formData.append('content', messageContent);
+
+    try {
+      // create a FormData object from the form
+
+      const response = await fetch('http://127.0.0.1:8000/api/v1/messages', {
+        method: 'POST',
+        body: formData,
       });
+      console.log(response.status, formData);
+
+    
+      if (response.ok) {
+        // success
+        console.log('Message sent successfully');
+        messageInput.value = '';
+        getMessages(userId);
+      } else {
+        // failure
+        console.error(response.status);
+        const data = await response.json();
+        console.error(data);
+        alert('An error occurred while sending the message');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while sending the message');
+    }
+    
   }
+  
 });
+  }
+})
+
+
+
+
