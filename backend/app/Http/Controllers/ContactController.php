@@ -13,12 +13,14 @@ class ContactController extends Controller
     public function setContact(Request $request){
         $fields = $request->validate([
             'user_id' => 'required',
+            'contact_id' => 'required',
             'name'        => 'required|string',
             'email' => 'required|string'
             
         ]);
         $contact = Contact::create([
             'user_id'        => $fields['user_id'],
+            'contact_id'        => $fields['contact_id'],
             'name'        => $fields['name'],
             'email' => $fields['email']
         ]);

@@ -1,4 +1,6 @@
 const userId = sessionStorage.getItem('userId');
+let recipientId;
+let intervalId;
 
 fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
   .then(response => response.json())
@@ -15,6 +17,12 @@ fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
         contacts.forEach(contact => {
           const chatElement = document.createElement('li');
           chatElement.textContent = contact.name;
+          chatElement.addEventListener('click', () => {
+            recipientId = contact.contact_id; // or whatever property holds the recipient ID
+            clearInterval(intervalId); // clear any previous interval
+            intervalId = setInterval(() => getMessages(userId, recipientId), 2000); // call getMessages() every 2 seconds
+            getMessages(userId, recipientId);
+          });
           chatsElement.appendChild(chatElement);
         });
       })
@@ -28,8 +36,8 @@ fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
     alert("An error occurred while getting user data");
   });
 
-function getMessages(userId) {
-  fetch(`http://127.0.0.1:8000/api/v1/messages/sender/${userId}/receiver/7`)
+function getMessages(userId, recipientId) {
+  fetch(`http://127.0.0.1:8000/api/v1/messages/sender/${userId}/receiver/${recipientId}`)
     .then(response => response.json())
     .then(messages => {
       const chatList = document.querySelector('#messages');
@@ -53,45 +61,27 @@ function getMessages(userId) {
     });
 }
 
-window.onload = function() {
-  getMessages(userId);
-};
-
 const form = document.querySelector('form');
 form.addEventListener('submit', async function(event) {
   event.preventDefault();
   const messageInput = document.querySelector('input[type="text"]');
   const messageContent = messageInput.value.trim();
-  if (messageContent.length > 0) {
-    
-    const form = document.querySelector('form');
-form.addEventListener('submit', async function(event) {
-  event.preventDefault();
-  const messageInput = document.querySelector('input[type="text"]');
-  const messageContent = messageInput.value.trim();
-  if (messageContent.length > 0) {
+  if (messageContent.length > 0 && recipientId) {
     const formData = new FormData();
     formData.append('sender', userId);
-    formData.append('recipient', 7);
+    formData.append('recipient', recipientId);
     formData.append('content', messageContent);
 
     try {
-      // create a FormData object from the form
-
       const response = await fetch('http://127.0.0.1:8000/api/v1/messages', {
         method: 'POST',
         body: formData,
       });
-      console.log(response.status, formData);
 
-    
       if (response.ok) {
-        // success
         console.log('Message sent successfully');
         messageInput.value = '';
-        getMessages(userId);
       } else {
-        // failure
         console.error(response.status);
         const data = await response.json();
         console.error(data);
@@ -105,9 +95,3 @@ form.addEventListener('submit', async function(event) {
   }
   
 });
-  }
-})
-
-
-
-
