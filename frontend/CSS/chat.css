@@ -34,6 +34,34 @@
     font-size: 1.2rem;
     margin-bottom: 10px;
   }
+
+  .sidebar a {
+    display: inline-block;
+    padding: 3px;
+    background-color: #2c3e50;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar a:hover {
+    background-color: #34495e;
+  }
+
+  /* Clickable contacts */
+.sidebar li {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar li:hover {
+  background-color: #34495e;
+}
   
   /* Chat box */
   .chat-box {

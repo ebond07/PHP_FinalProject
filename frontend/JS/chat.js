@@ -5,8 +5,8 @@ let intervalId;
 fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
   .then(response => response.json())
   .then(user => {
-    const usernameElement = document.querySelector('#username');
-    usernameElement.textContent = `Hello, ${user.name}`;
+    const usernameElement = document.querySelector('#welcome');
+    usernameElement.textContent = `Welcome ${user.name}`;
 
     fetch(`http://127.0.0.1:8000/api/v1/getContactsByUser/${userId}`)
       .then(response => response.json())
@@ -22,6 +22,8 @@ fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
             clearInterval(intervalId); // clear any previous interval
             intervalId = setInterval(() => getMessages(userId, recipientId), 2000); // call getMessages() every 2 seconds
             getMessages(userId, recipientId);
+            const chatTitle = document.querySelector('h1');
+            chatTitle.textContent = `Chat - ${contact.name}`;
           });
           chatsElement.appendChild(chatElement);
         });
