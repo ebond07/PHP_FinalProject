@@ -17,6 +17,7 @@ return new class extends Migration
              ->references('id')
              ->on('chat_users');
         $table->longtext('content');
+        $table->string('image')->nullable();
         $table->timestamps();
     });
 }

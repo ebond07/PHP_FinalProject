@@ -14,15 +14,24 @@ class MessageController extends Controller
 {
     public function setMessage(Request $request){
         $fields = $request->validate([
-            'recipient'        => 'required',
+            'recipient' => 'required',
             'sender' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'nullable|image|max:2048'
         ]);
-    
+        
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('images', 'public'); 
+        }
+
         $message = Message::create([
-            'recipient'        => $fields['recipient'],
+            'recipient' => $fields['recipient'],
             'sender' => $fields['sender'],
-            'content' => $fields['content']
+            'content' => $fields['content'],
+            'image' => $imagePath
         ]);
     
         // Create the User_Message entry

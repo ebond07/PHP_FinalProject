@@ -12,7 +12,8 @@ class Message extends Model
     protected $fillable=[
         'recipient',
         'sender',
-        'content'
+        'content',
+        'image'
     ];
     public function user_messages(): HasMany
     {
